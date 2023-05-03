@@ -1,0 +1,10 @@
+2022-11-01|03:21|Stimulus|Irs Refund|1400.00
+2022-12-21|04:30|Sweaters|SPY|-198.0
+2023-01-12|02:43|Spa|Sojo Spa Club|-100.00
+2023-02-10|10:13:25|Protein powder|Amazon|45.00
+2023-03-15|11:15:00|Paycheck|Chipotle|495.00
+2023-04-23|12:03:00|Plane Tickets|Chase|-298.00
+2023-04-26|08:23:00|Sonder Hotel|Airbnb|-798.00
+2023-04-29|06:00:00|Stipend|YearUp|250.00
+2023-05-01|12:42:17|Lenovo Laptop|Microcenter|400.0
+2023-05-01|12:44:02|Mouse|Microcenter|-200.0
