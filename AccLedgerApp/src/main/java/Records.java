@@ -1,13 +1,9 @@
 
 
 import java.io.*;
-import java.sql.SQLOutput;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -35,9 +31,6 @@ public class Records {
                     System.out.println("---------------------------");
                     addDeposit();
                     System.out.println("---------------------------");
-                    /*for (int i = 0; i < records.size(); i++){
-                        System.out.println(records.get(i));
-                    }*/
                     break;
                 case "P":
                     System.out.println("---------------------------");
@@ -68,15 +61,13 @@ public class Records {
                         break;
                         default:
                             System.out.println("Wrong input, Please try again");
-                            break;
+                            continue;
                     }
                 case "X":
                     return;
                 default:
                     System.out.println("Wrong input, please try again");
-                    break;
-            }
-
+                }
             }
         }
     }
@@ -87,7 +78,7 @@ public class Records {
         String info;
 
         try {
-            Scanner reader = new Scanner(new File("file.txt"));
+            Scanner reader = new Scanner(new File("transactions.csv"));
             while(reader.hasNext()) {
                 info = reader.nextLine();
                 String[] information = info.split(Pattern.quote("|"));
@@ -122,7 +113,7 @@ public class Records {
     }
     public static void addDeposit(){
         try {
-            String filepath = "file.txt";
+            String filepath = "transactions.csv";
             FileWriter fileWriter = new FileWriter(filepath,true);
             BufferedWriter BW = new BufferedWriter(fileWriter);
 
@@ -140,7 +131,7 @@ public class Records {
 
 
             Transactions newTransaction = new Transactions(date,time,description,vendor,payment);
-            BW.write(newTransaction.getDate() + "|" + newTransaction.getTime() + "|" + newTransaction.getDescription() + "|" + newTransaction.getVendor() + "|" + newTransaction.getPrice());
+            BW.write(newTransaction.getDate() + "|" + newTransaction.getTime() + "|" + newTransaction.getDescription() + "|" + newTransaction.getVendor() + "|" + newTransaction.getAmount());
             BW.newLine();
             records.add(newTransaction);
             System.out.println("This transaction was added.");
@@ -151,7 +142,7 @@ public class Records {
     }
     public static void makePayment(){
         try {
-            String filepath = "file.txt";
+            String filepath = "transactions.csv";
             FileWriter fileWriter = new FileWriter(filepath,true);
             BufferedWriter BW = new BufferedWriter(fileWriter);
 
@@ -169,7 +160,7 @@ public class Records {
 
 
             Transactions newTransaction = new Transactions(date,time,description,vendor,payment);
-            BW.write(newTransaction.getDate() + "|" + newTransaction.getTime() + "|" + newTransaction.getDescription() + "|" + newTransaction.getVendor() + "|" + newTransaction.getPrice());
+            BW.write(newTransaction.getDate() + "|" + newTransaction.getTime() + "|" + newTransaction.getDescription() + "|" + newTransaction.getVendor() + "|" + newTransaction.getAmount());
             BW.newLine();
             records.add(newTransaction);
             System.out.println("This transaction was added.");
@@ -185,14 +176,14 @@ public class Records {
     }
     public static void displayPosEntries(){
         for(Transactions value: records ){
-            if (value.getPrice() > 0){
+            if (value.getAmount() > 0){
                 System.out.println(value);
             }
         }
     }
     public static void displayPayments(){
         for (Transactions value : records){
-            if(value.getPrice() < 0){
+            if(value.getAmount() < 0){
                 System.out.println(value);
             }
         }
@@ -212,14 +203,14 @@ public class Records {
         switch(answer2){
             case 1:
                 for(Transactions value: records){
-                    if(value.getDate().getMonth() == date.getMonth()){
+                    if(value.getDate().getMonth() == date.getMonth() && date.getYear() == value.getDate().getYear()){
                         System.out.println(value);
                     }
                 }
             break;
             case 2:
                 for(Transactions value:records){
-                    if (value.getDate().getMonthValue() == date.getMonthValue()-1) {
+                    if ((value.getDate().getMonthValue() == date.getMonthValue()-1) && date.getYear() == value.getDate().getYear()) {
                         System.out.println(value);
                     }
                 }
@@ -304,7 +295,7 @@ public class Records {
                     if(!answer3.isEmpty() && !(value.getVendor().equalsIgnoreCase(answer3))){
                         addthis=false;
                     }
-                    if(!(amount == null) && !(value.getPrice() == amount)){
+                    if(!(amount == null) && !(value.getAmount() == amount)){
                         addthis=false;
                     }
                     if(addthis){
