@@ -211,28 +211,28 @@ public class Records {
         switch(answer2){
             case 1:
                 for(Transactions value: records){
-                    if(value.getDate().isBefore(date.plusDays(1)) && value.getDate().isAfter(date.minusMonths(1).minusDays(1))){
+                    if(value.getDate().getMonth() == date.getMonth()){
                         System.out.println(value);
                     }
                 }
             break;
             case 2:
                 for(Transactions value:records){
-                    if (value.getDate().isAfter(date.minusMonths(1).minusDays(1)) && value.getDate().isBefore(date.minusMonths(1)) ){
+                    if (value.getDate().getMonthValue() == date.getMonthValue()-1) {
                         System.out.println(value);
                     }
                 }
             break;
             case 3:
                 for(Transactions value:records){
-                    if(value.getDate().isBefore(date.plusDays(1)) && value.getDate().isAfter(date.minusYears(1))){
+                    if(value.getDate().getYear() == date.getYear()) {
                         System.out.println(value);
                     }
                 }
             break;
             case 4:
                 for(Transactions value:records){
-                    if(value.getDate().isAfter(date.minusYears(1).minusMonths(date.getMonthValue())) && value.getDate().isBefore(date.minusMonths(date.getMonthValue()-1))){
+                    if(value.getDate().getYear() == (date.getYear()-1)){
                         System.out.println(value);
                     }
                 }
