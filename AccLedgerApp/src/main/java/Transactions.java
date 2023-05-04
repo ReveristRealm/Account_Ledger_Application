@@ -1,21 +1,20 @@
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Transactions {
 private LocalDate date;
 private LocalTime time;
 private String description;
 private String vendor;
-private double price;
+private double amount;
 
-    public Transactions(LocalDate date, LocalTime time, String description, String vendor, double price){
+    public Transactions(LocalDate date, LocalTime time, String description, String vendor, double amount){
         this.date = date;
         this.time = time;
         this.description = description;
         this.vendor = vendor;
-        this.price = price;
+        this.amount = amount;
     }
     public LocalDate getDate() {
         return date;
@@ -48,12 +47,12 @@ private double price;
         this.vendor = vendor;
     }
 
-    public double getPrice() {
-        return price;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
     @Override
     public String toString() {
@@ -62,6 +61,6 @@ private double price;
                 " | " + time +
                 " | " + description +
                 " | " + vendor +
-                " | " + price ;
+                " | " + amount;
     }
 }
