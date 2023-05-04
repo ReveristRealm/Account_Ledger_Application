@@ -205,6 +205,7 @@ public class Records {
         System.out.println("3) Year To Date");
         System.out.println("4) Previous Year");
         System.out.println("5) Search by Vendor");
+        System.out.println("6) Custom Search");
         System.out.println("0) Go back to home page");
 
         int answer2 = userInput.nextInt();
@@ -246,6 +247,75 @@ public class Records {
                     }
                 }
             break;
+            case 6:
+                ArrayList<Transactions> newRecords = new ArrayList<>();
+                LocalDate SD1=null;
+                LocalDate SD2=null;
+                Double amount = null;
+                String des;
+                String answer3;
+
+                System.out.println("Do you have a Start and End date? Y or N");
+                String answer = userInput.next();
+                if(answer.equalsIgnoreCase("y")){
+                    System.out.println("What is the start date(yyyy-mm-dd)?");
+                    String SD = userInput.next();
+                    SD1 = LocalDate.parse(SD);
+                    System.out.println("What is the end date(yyyy-mm-dd)?");
+                    String ED = userInput.next();
+                    SD2 = LocalDate.parse(ED);
+                }
+
+                System.out.println("Do you have a description? Y or N");
+                String response1 = userInput.next();
+                if(response1.equalsIgnoreCase("y")){
+                    System.out.println("What is the description?");
+                     des = userInput.next();
+                }else{
+                     des = "";
+                }
+
+                System.out.println("Do you have a vendor?");
+                String response2 = userInput.next();
+                if (response2.equalsIgnoreCase("Y")){
+                    System.out.println("What is the Vendor?");
+                    answer3 = userInput.next();
+
+                }else{
+                    answer3 = "";
+                }
+
+                System.out.println("Do you have an amount to enter? Y or N");
+                String response3 = userInput.next();
+                if (response3.equalsIgnoreCase("y")){
+                    System.out.println("What was the amount?");
+                    amount = userInput.nextDouble();
+                }
+
+                for(Transactions value : records){
+                    boolean addthis = true;
+
+                    if(!((SD1 == null)&&(SD2 ==null)) && !(value.getDate().isAfter(SD1) && value.getDate().isBefore(SD2))){
+                        addthis=false;
+                    }
+                    if(!des.isEmpty() && !(value.getDescription().equalsIgnoreCase(des))){
+                        addthis=false;
+                    }
+                    if(!answer3.isEmpty() && !(value.getVendor().equalsIgnoreCase(answer3))){
+                        addthis=false;
+                    }
+                    if(!(amount == null) && !(value.getPrice() == amount)){
+                        addthis=false;
+                    }
+                    if(addthis){
+                        newRecords.add(value);
+                    }
+                }
+
+                for (Transactions value: newRecords){
+                    System.out.println(value);
+                }
+
             case 0:
             break;
     }
